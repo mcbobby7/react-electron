@@ -29,4 +29,67 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
+.active {
+  background-color: red;
+}
+.stat {
+  font-size: 17px;
+  text-align: left;
+}
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  color: #3b4241;
+}
 
+.run {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(26, 202, 26);
+  display: inline-block;
+  margin-left: 5px;
+}
+table {
+  font-family: Verdana;
+  font-size: 14px;
+  border-collapse: collapse;
+  width: 100%;
+  color: rgb(104, 92, 92);
+}
+
+td,
+th {
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+  border-bottom: 1px solid rgb(230, 227, 227);
+  font-size: 12px;
+}
+.dev {
+  width: "30%";
+}
+.tab {
+  width: "68%";
+  height: "100%";
+}
+.status {
+  width: 200px;
+  box-shadow: 0 3px 7px rgba(99, 97, 97, 0.2);
+  height: 100%;
+  padding: 20px 10px;
+  background-color: white;
+  margin: 5px;
+}
+
+/* tbody tr:nth-child(2n) {
+  background-color: #eee;
+} */
+
+/* th {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: white;
+} */
