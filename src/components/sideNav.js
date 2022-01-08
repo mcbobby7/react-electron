@@ -50,7 +50,6 @@ const itemCategory = {
 export default function Navigator(props) {
   const history = useHistory();
   const location = useLocation();
-  console.log(props);
   const categories = [
     {
       id: "Dashboard",

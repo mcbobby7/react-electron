@@ -393,7 +393,7 @@ function Header(props) {
         if (localStorage.getItem("coin") === "BTC") {
           let packageName = localStorage.getItem("package");
           if (packageName === "Hatch") {
-            SetInt(90);
+            SetInt(80);
             let price = +localStorage.getItem("BTCprice") + 0.0000001;
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
             localStorage.setItem("BTCprice", price);
@@ -405,18 +405,18 @@ function Header(props) {
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
-            console.log("mining BTC");
+            console.log("mining BTC baby");
           } else if (packageName === "Adult") {
-            SetInt(20);
+            SetInt(26);
             let price = +localStorage.getItem("BTCprice") + 0.0000001;
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
-            console.log("mining BTC");
+            console.log("mining BTC adult");
           } else if (packageName === "Aged") {
-            SetInt(1);
-            let price = +localStorage.getItem("BTCprice") + 0.0000001;
-            let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
+            SetInt(0);
+            let price = +localStorage.getItem("BTCprice") + 0.0000005;
+            let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000005;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
             console.log("mining BTC");
@@ -424,81 +424,81 @@ function Header(props) {
         } else if (localStorage.getItem("coin") === "LTC") {
           let packageName = localStorage.getItem("package");
           if (packageName === "Hatch") {
-            SetInt(60);
-            let price = +localStorage.getItem("LTCprice") + 0.00001;
-            let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
-            localStorage.setItem("LTCprice", price);
-            localStorage.setItem("TotalLtc", Totalprice);
-          } else if (packageName === "Baby") {
             SetInt(40);
             let price = +localStorage.getItem("LTCprice") + 0.00001;
             let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
             localStorage.setItem("LTCprice", price);
             localStorage.setItem("TotalLtc", Totalprice);
-          } else if (packageName === "Adult") {
+          } else if (packageName === "Baby") {
             SetInt(20);
+            let price = +localStorage.getItem("LTCprice") + 0.00001;
+            let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
+            localStorage.setItem("LTCprice", price);
+            localStorage.setItem("TotalLtc", Totalprice);
+          } else if (packageName === "Adult") {
+            SetInt(10);
             let price = +localStorage.getItem("LTCprice") + 0.00001;
             let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
             localStorage.setItem("LTCprice", price);
             localStorage.setItem("TotalLtc", Totalprice);
           } else if (packageName === "Aged") {
             SetInt(0);
-            let price = +localStorage.getItem("LTCprice") + 0.000001;
-            let Totalprice = +localStorage.getItem("TotalLtc") + 0.000001;
+            let price = +localStorage.getItem("LTCprice") + 0.000008;
+            let Totalprice = +localStorage.getItem("TotalLtc") + 0.000008;
             localStorage.setItem("LTCprice", price);
             localStorage.setItem("TotalLtc", Totalprice);
           }
         } else if (localStorage.getItem("coin") === "BNB") {
           let packageName = localStorage.getItem("package");
           if (packageName === "Hatch") {
-            SetInt(60);
-            let price = +localStorage.getItem("BNBprice") + 0.00000001;
-            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            SetInt(0);
+            let price = +localStorage.getItem("BNBprice") + 0.0000007;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.0000007;
             localStorage.setItem("BNBprice", price);
             localStorage.setItem("TotalBnb", Totalprice);
           } else if (packageName === "Baby") {
-            SetInt(40);
-            let price = +localStorage.getItem("BNBprice") + 0.00000001;
-            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            SetInt(0);
+            let price = +localStorage.getItem("BNBprice") + 0.000001;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00001;
             localStorage.setItem("BNBprice", price);
             localStorage.setItem("TotalBnb", Totalprice);
           } else if (packageName === "Adult") {
-            SetInt(20);
-            let price = +localStorage.getItem("BNBprice") + 0.00000001;
-            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            SetInt(0);
+            let price = +localStorage.getItem("BNBprice") + 0.000005;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.000005;
             localStorage.setItem("BNBprice", price);
             localStorage.setItem("TotalBnb", Totalprice);
           } else if (packageName === "Aged") {
-            SetInt(5);
-            let price = +localStorage.getItem("BNBprice") + 0.00000001;
-            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            SetInt(0);
+            let price = +localStorage.getItem("BNBprice") + 0.000009;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.000009;
             localStorage.setItem("BNBprice", price);
             localStorage.setItem("TotalBnb", Totalprice);
           }
         } else if (localStorage.getItem("coin") === "ETH") {
           let packageName = localStorage.getItem("package");
           if (packageName === "Hatch") {
-            SetInt(60);
-            let price = +localStorage.getItem("ETHprice") + 0.0000001;
-            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            SetInt(100);
+            let price = +localStorage.getItem("ETHprice") + 0.0000006;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000006;
             localStorage.setItem("ETHprice", price);
             localStorage.setItem("TotalEth", Totalprice);
           } else if (packageName === "Baby") {
-            SetInt(40);
+            SetInt(80);
             let price = +localStorage.getItem("ETHprice") + 0.0000001;
             let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
             localStorage.setItem("ETHprice", price);
             localStorage.setItem("TotalEth", Totalprice);
           } else if (packageName === "Adult") {
-            SetInt(20);
-            let price = +localStorage.getItem("ETHprice") + 0.0000001;
-            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            SetInt(60);
+            let price = +localStorage.getItem("ETHprice") + 0.000001;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.000001;
             localStorage.setItem("ETHprice", price);
             localStorage.setItem("TotalEth", Totalprice);
           } else if (packageName === "Aged") {
-            SetInt(5);
-            let price = +localStorage.getItem("ETHprice") + 0.0000001;
-            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            SetInt(20);
+            let price = +localStorage.getItem("ETHprice") + 0.0000007;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000007;
             localStorage.setItem("ETHprice", price);
             localStorage.setItem("TotalEth", Totalprice);
           }
@@ -507,7 +507,7 @@ function Header(props) {
     }, int);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkeStatus, int]);
+  }, [checkeStatus, notification]);
   const GreenSwitch = styled(Switch)(({ theme }) => ({
     "& .MuiSwitch-switchBase.Mui-checked": {
       color: pink[600],
