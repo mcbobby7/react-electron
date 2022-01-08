@@ -57,7 +57,11 @@ const Configuration = () => {
   const getData = useCallback(() => {
     try {
       axios
-        .get(`http://localhost:5000/users/user/${localStorage.getItem("id")}`)
+        .get(
+          `https://calm-beyond-85832.herokuapp.com/users/user/${localStorage.getItem(
+            "id"
+          )}`
+        )
         .then((res) => {
           setLoading(false);
           console.log(res.data);
@@ -84,26 +88,30 @@ const Configuration = () => {
   }, [data]);
 
   const handleSubmit1 = (event) => {
-    let btc = +localStorage.getItem("TotalBtc");
-    let ltc = +localStorage.getItem("TotalLtc");
-    let bnb = +localStorage.getItem("TotalBnb");
-    let eth = +localStorage.getItem("TotalEth");
+    let btc = parseFloat(localStorage.getItem("TotalBtc"));
+    let ltc = parseFloat(localStorage.getItem("TotalLtc"));
+    let bnb = parseFloat(localStorage.getItem("TotalBnb"));
+    let eth = parseFloat(localStorage.getItem("TotalEth"));
 
-    console.log(+passkey);
+    console.log(localStorage.getItem("TotalBnb"));
+    console.log(+btc);
+    console.log(+ltc);
+    console.log(+bnb);
+    console.log(+eth);
     console.log(coin);
     if (mode === "BTC") {
       if (!btcaddp && !blockp) {
         alert(
           "Please add your bitcoin address from WALLET settings to withdraw your BTC"
         );
+        return false;
       } else {
-        if (+passkey > btc) {
+        if (+value > btc || !btc || btc === null || btc === undefined) {
           console.log(btc);
           toast.error("Error: trying to withdraw more BTC than you have");
           setLoading(false);
           return false;
         }
-        setValue(passkey);
       }
     }
 
@@ -112,13 +120,13 @@ const Configuration = () => {
         alert(
           "Please add your litcoin address from WALLET settings to withdraw your LTC"
         );
+        return false;
       } else {
-        if (+passkey > ltc) {
+        if (+value > ltc || !ltc || ltc === null || ltc === undefined) {
           toast.error("Error: trying to withdraw more LTC than you have");
           setLoading(false);
           return false;
         }
-        setValue(passkey);
       }
     }
 
@@ -127,13 +135,13 @@ const Configuration = () => {
         alert(
           "Please add your Binance coin address from WALLET settings to withdraw your BNB"
         );
+        return false;
       } else {
-        if (+passkey > bnb) {
+        if (+value > bnb || !bnb || bnb === null || bnb === undefined) {
           toast.error("Error: trying to withdraw more BNB than you have");
           setLoading(false);
           return false;
         }
-        setValue(passkey);
       }
     }
 
@@ -144,13 +152,13 @@ const Configuration = () => {
         alert(
           "Please add your Etherium address from WALLET settings to withdraw your ETH"
         );
+        return false;
       } else {
-        if (+passkey > eth) {
+        if (+value > eth || !eth || eth === null || eth === undefined) {
           toast.error("Error: trying to withdraw more ETH than you have");
           setLoading(false);
           return false;
         }
-        setValue(passkey);
       }
     }
 
@@ -196,7 +204,7 @@ const Configuration = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:5000/users/withdarw", data, {
+      .post("https://calm-beyond-85832.herokuapp.com/users/withdarw", data, {
         headers: headers,
       })
       .then((res) => {

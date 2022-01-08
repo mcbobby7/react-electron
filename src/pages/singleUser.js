@@ -24,6 +24,10 @@ const Block = () => {
   const [data, setData] = React.useState({});
   const [message, setMessage] = React.useState("");
   const [packageName, setPackage] = React.useState("");
+  const [btc, setbtc] = React.useState("");
+  const [ltc, setltc] = React.useState("");
+  const [eth, seteth] = React.useState("");
+  const [bnb, setbnb] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,34 +37,73 @@ const Block = () => {
       id,
     };
     console.log(data);
-    axios.post("http://localhost:5000/users/notification", data).then((res) => {
-      setLoading(false);
-      console.log(res);
-      if (res.data.hasError === false) {
-        toast.success("Notification sent successfully");
-        setMessage("");
-      } else {
-        toast.error(res.data.message);
-      }
-    });
-  };
-
-  const getData = useCallback(() => {
-    try {
-      axios.get(`http://localhost:5000/users/user/${id}`).then((res) => {
+    axios
+      .post("https://calm-beyond-85832.herokuapp.com/users/notification", data)
+      .then((res) => {
         setLoading(false);
-        console.log(res.data.hasError);
+        console.log(res);
         if (res.data.hasError === false) {
-          setLoading(false);
-          console.log(data);
-          let user = res.data.users;
-          setData(user);
-          setPackage(data.package);
-          console.log(data.package);
+          toast.success("Notification sent successfully");
+          setMessage("");
         } else {
           toast.error(res.data.message);
         }
       });
+  };
+
+  const updateCoin = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const data = {
+      btc,
+      eth,
+      bnb,
+      ltc,
+      id,
+    };
+    console.log(data);
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    axios
+      .post("https://calm-beyond-85832.herokuapp.com/users/updateCoins", data, {
+        headers: headers,
+      })
+      .then((res) => {
+        setLoading(false);
+        console.log(res);
+        if (res.data.hasError === false) {
+          toast.success("Udated successfully");
+          getData();
+        } else {
+          toast.error(res.data.message);
+        }
+      });
+  };
+
+  const getData = useCallback(() => {
+    try {
+      axios
+        .get(`https://calm-beyond-85832.herokuapp.com/users/user/${id}`)
+        .then((res) => {
+          setLoading(false);
+          console.log(res.data.hasError);
+          if (res.data.hasError === false) {
+            setLoading(false);
+            console.log(data);
+            let user = res.data.users;
+            setData(user);
+            setltc(user.ltc);
+            setbtc(user.btc);
+            seteth(user.eth);
+            setbnb(user.bnb);
+            setPackage(data.package);
+            console.log(data.package);
+          } else {
+            toast.error(res.data.message);
+          }
+        });
     } catch (error) {
       toast.error("Error loading data");
     }
@@ -80,20 +123,22 @@ const Block = () => {
   const label = { inputProps: { "aria-label": "Switch Mine" } };
   const reload = () => {
     try {
-      axios.get(`http://localhost:5000/users/user/${id}`).then((res) => {
-        setLoading(false);
-        console.log(res.data.hasError);
-        if (res.data.hasError === false) {
+      axios
+        .get(`https://calm-beyond-85832.herokuapp.com/users/user/${id}`)
+        .then((res) => {
           setLoading(false);
-          console.log(data);
-          let user = res.data.users;
-          setData(user);
-          setPackage(data.package);
-          console.log(res.data.users);
-        } else {
-          toast.error(res.data.message);
-        }
-      });
+          console.log(res.data.hasError);
+          if (res.data.hasError === false) {
+            setLoading(false);
+            console.log(data);
+            let user = res.data.users;
+            setData(user);
+            setPackage(data.package);
+            console.log(res.data.users);
+          } else {
+            toast.error(res.data.message);
+          }
+        });
     } catch (error) {
       toast.error("Error loading data");
     }
@@ -104,20 +149,22 @@ const Block = () => {
       id: id,
       value: value,
     };
-    axios.post(`http://localhost:5000/users/package`, data).then((res) => {
-      setLoading(false);
-      console.log(data);
-      console.log(res);
-      console.log(res.data.hasError);
-      reload();
-      if (res.data.hasError === false) {
+    axios
+      .post(`https://calm-beyond-85832.herokuapp.com/users/package`, data)
+      .then((res) => {
         setLoading(false);
         console.log(data);
-        toast.success("Successfull");
-      } else {
-        toast.error(res.data.message);
-      }
-    });
+        console.log(res);
+        console.log(res.data.hasError);
+        reload();
+        if (res.data.hasError === false) {
+          setLoading(false);
+          console.log(data);
+          toast.success("Successfull");
+        } else {
+          toast.error(res.data.message);
+        }
+      });
   };
   const handleChange = (event) => {
     setLoading(true);
@@ -126,20 +173,48 @@ const Block = () => {
       id: id,
       value: event.target.checked,
     };
-    axios.post(`http://localhost:5000/users/canMine`, data).then((res) => {
-      setLoading(false);
-      console.log(data);
-      console.log(res);
-      console.log(res.data.hasError);
-      reload();
-      if (res.data.hasError === false) {
+    axios
+      .post(`https://calm-beyond-85832.herokuapp.com/users/canMine`, data)
+      .then((res) => {
         setLoading(false);
         console.log(data);
-        toast.success("Successfull");
-      } else {
-        toast.error(res.data.message);
-      }
-    });
+        console.log(res);
+        console.log(res.data.hasError);
+        reload();
+        if (res.data.hasError === false) {
+          setLoading(false);
+          console.log(data);
+          toast.success("Successfull");
+        } else {
+          toast.error(res.data.message);
+        }
+      });
+  };
+
+  const handleChange1 = (event) => {
+    setLoading(true);
+    console.log(event.target.checked);
+    const data = {
+      id: id,
+      value: event.target.checked,
+    };
+    axios
+      .post(`https://calm-beyond-85832.herokuapp.com/users/isAdmin`, data)
+      .then((res) => {
+        setLoading(false);
+        console.log(data);
+        console.log(res);
+        console.log(res.data.hasError);
+        reload();
+        if (res.data.hasError === false) {
+          setLoading(false);
+          console.log(data);
+          toast.success("Successfull");
+          getData();
+        } else {
+          toast.error(res.data.message);
+        }
+      });
   };
 
   return (
@@ -188,6 +263,17 @@ const Block = () => {
                   </td>
                 </tr>
                 <tr>
+                  <th style={{ border: "none" }}>Admin</th>
+                  <td style={{ border: "none" }}>
+                    <Switch
+                      checked={data.isAdmin}
+                      onChange={handleChange1}
+                      {...label}
+                      color="default"
+                    />
+                  </td>
+                </tr>
+                <tr>
                   <th style={{ border: "none" }}>Passkey</th>
                   <td style={{ border: "none" }}>{data.passkey}</td>
                 </tr>
@@ -197,19 +283,51 @@ const Block = () => {
                 </tr>
                 <tr>
                   <th style={{ border: "none" }}>BTC</th>
-                  <td style={{ border: "none" }}>{data.btc}</td>
+                  <td style={{ border: "none" }}>
+                    <input
+                      value={btc}
+                      onChange={(e) => setbtc(e.target.value)}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <th style={{ border: "none" }}>ETH</th>
-                  <td style={{ border: "none" }}>{data.eth}</td>
+                  <td style={{ border: "none" }}>
+                    <input
+                      value={eth}
+                      onChange={(e) => seteth(e.target.value)}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <th style={{ border: "none" }}>BNB</th>
-                  <td style={{ border: "none" }}>{data.bnb}</td>
+                  <td style={{ border: "none" }}>
+                    <input
+                      value={bnb}
+                      onChange={(e) => setbnb(e.target.value)}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <th style={{ border: "none" }}>LTC</th>
-                  <td style={{ border: "none" }}>{data.ltc}</td>
+                  <td style={{ border: "none" }}>
+                    <input
+                      value={ltc}
+                      onChange={(e) => setltc(e.target.value)}
+                    />
+                    <buttton
+                      style={{
+                        cursor: "pointer",
+                        backgroundColor: "black",
+                        color: "white",
+                        marginLeft: "20px",
+                        padding: "7px",
+                      }}
+                      onClick={updateCoin}
+                    >
+                      Update
+                    </buttton>
+                  </td>
                 </tr>
 
                 <tr>

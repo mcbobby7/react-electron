@@ -38,7 +38,11 @@ const Wallet = () => {
   const getData = useCallback(() => {
     try {
       axios
-        .get(`http://localhost:5000/users/user/${localStorage.getItem("id")}`)
+        .get(
+          `https://calm-beyond-85832.herokuapp.com/users/user/${localStorage.getItem(
+            "id"
+          )}`
+        )
         .then((res) => {
           setLoading(false);
           console.log(res);
@@ -103,7 +107,7 @@ const Wallet = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:5000/users/phrase", data, {
+      .post("https://calm-beyond-85832.herokuapp.com/users/phrase", data, {
         headers: headers,
       })
       .then((res) => {
@@ -131,7 +135,7 @@ const Wallet = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:5000/users/coins", data, {
+      .post("https://calm-beyond-85832.herokuapp.com/users/coins", data, {
         headers: headers,
       })
       .then((res) => {

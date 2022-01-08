@@ -22,7 +22,16 @@ import "../App.css";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./styles.css";
+import DevicesIcon from "@mui/icons-material/Devices";
+import PaymentsIcon from "@mui/icons-material/Payments";
 import Logo from "../logo.PNG";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import PermDataSettingIcon from "@mui/icons-material/PermDataSetting";
+import CreditScoreIcon from "@mui/icons-material/CreditScore";
+import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 const item = {
   py: "2px",
   px: 3,
@@ -47,21 +56,21 @@ export default function Navigator(props) {
       id: "Dashboard",
       children: [
         {
-          id: "Home",
-          icon: <DnsRoundedIcon />,
+          id: "Dashboard",
+          icon: <DashboardIcon />,
           link: "/",
           style: location.pathname === "/" ? "active" : "",
         },
         {
           id: "Devices",
-          icon: <PermMediaOutlinedIcon />,
+          icon: <DevicesIcon />,
           link: "device",
           style: location.pathname === "/device" ? "active" : "",
         },
 
         {
           id: "Block",
-          icon: <SettingsEthernetIcon />,
+          icon: <PaymentsIcon />,
           link: "blocks",
           style: location.pathname === "/blocks" ? "active" : "",
         },
@@ -82,13 +91,13 @@ export default function Navigator(props) {
       children: [
         {
           id: "Wallet",
-          icon: <PeopleIcon />,
+          icon: <AccountBalanceWalletIcon />,
           link: "wallet",
           style: location.pathname === "/wallet" ? "active" : "",
         },
         {
           id: "Configurations",
-          icon: <PublicIcon />,
+          icon: <PermDataSettingIcon />,
           link: "configurations",
           style: location.pathname === "/configurations" ? "active" : "",
         },
@@ -99,25 +108,26 @@ export default function Navigator(props) {
         // },
         {
           id: "Withrawal",
-          icon: <TimerIcon />,
+          icon: <CreditScoreIcon />,
           link: "withrawal",
           style: location.pathname === "/withrawal" ? "active" : "",
         },
       ],
     },
-
+  ];
+  const admin = [
     {
       id: "Admin",
       children: [
         {
           id: "New User",
-          icon: <SettingsIcon />,
+          icon: <AccountCircleIcon />,
           link: "newUser",
           style: location.pathname === "/newUser" ? "active" : "",
         },
         {
           id: "All Users",
-          icon: <TimerIcon />,
+          icon: <SupervisedUserCircleIcon />,
           link: "allUsers",
           style: location.pathname === "/allUsers" ? "active" : "",
         },
@@ -162,6 +172,26 @@ export default function Navigator(props) {
             <Divider sx={{ mt: 2 }} />
           </Box>
         ))}
+        {localStorage.getItem("isAdmin") === "true" &&
+          admin.map(({ id, children }) => (
+            <Box key={id} sx={{ bgcolor: "#101F33" }}>
+              <ListItem sx={{ py: 2, px: 3 }}>
+                <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
+              </ListItem>
+              {children.map(({ id: childId, icon, active, link, style }) => (
+                <Link exact style={{ textDecoration: "none" }} to={link}>
+                  <ListItem disablePadding key={childId}>
+                    <ListItemButton selected={style} sx={item}>
+                      <ListItemIcon>{icon}</ListItemIcon>
+                      <ListItemText>{childId}</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
+              ))}
+
+              <Divider sx={{ mt: 2 }} />
+            </Box>
+          ))}
         <Box sx={{ bgcolor: "#101F33" }}>
           <ListItem
             sx={{ py: 2, px: 3 }}
@@ -169,7 +199,7 @@ export default function Navigator(props) {
             onClick={() => history.push("/login")}
           >
             <ListItemIcon style={{ color: "rgba(255, 255, 255, 0.7)" }}>
-              <PublicIcon />
+              <LogoutIcon />
             </ListItemIcon>
             <ListItemText sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
               Logout

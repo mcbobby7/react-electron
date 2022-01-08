@@ -32,7 +32,7 @@ const Configuration = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:5000/users/passkey", data, {
+      .post("https://calm-beyond-85832.herokuapp.com/users/passkey", data, {
         headers: headers,
       })
       .then((res) => {

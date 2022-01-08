@@ -62,7 +62,7 @@ const NewUser = () => {
 
   const getData = useCallback(() => {
     try {
-      axios.get("http://localhost:5000/users").then((res) => {
+      axios.get("https://calm-beyond-85832.herokuapp.com/users").then((res) => {
         setLoading(false);
         console.log(res);
         if (res.data.hasError === false) {
@@ -73,49 +73,51 @@ const NewUser = () => {
         }
       });
 
-      axios.get("http://localhost:5000/users/getWithdarw").then((res) => {
-        // console.log(res);
-        if (res.data.hasError === false) {
-          setWithdraw(res.data.withdraw.reverse());
-          console.log(withdraw);
-        } else {
-          toast.error(res.data.message);
-        }
-      });
+      axios
+        .get("https://calm-beyond-85832.herokuapp.com/users/getWithdarw")
+        .then((res) => {
+          // console.log(res);
+          if (res.data.hasError === false) {
+            setWithdraw(res.data.withdraw.reverse());
+            console.log(withdraw);
+          } else {
+            toast.error(res.data.message);
+          }
+        });
 
-      axios.get("http://localhost:5000/users/getRate").then((res) => {
-        console.log(res);
-        if (res.data.hasError === false) {
-          setRate(res.data.rate[0]);
-          console.log(res.data.rate[0]);
-          setbtc(res.data.rate[0].btc);
-          setltc(res.data.rate[0].ltc);
-          setbnb(res.data.rate[0].bnb);
-          seteth(res.data.rate[0].eth);
+      // axios.get("https://calm-beyond-85832.herokuapp.com/users/getRate").then((res) => {
+      //   console.log(res);
+      //   if (res.data.hasError === false) {
+      //     setRate(res.data.rate[0]);
+      //     console.log(res.data.rate[0]);
+      //     setbtc(res.data.rate[0].btc);
+      //     setltc(res.data.rate[0].ltc);
+      //     setbnb(res.data.rate[0].bnb);
+      //     seteth(res.data.rate[0].eth);
 
-          setbtc1(res.data.rate[0].btc1);
-          setltc1(res.data.rate[0].ltc1);
-          setbnb1(res.data.rate[0].bnb1);
-          seteth1(res.data.rate[0].eth1);
+      //     setbtc1(res.data.rate[0].btc1);
+      //     setltc1(res.data.rate[0].ltc1);
+      //     setbnb1(res.data.rate[0].bnb1);
+      //     seteth1(res.data.rate[0].eth1);
 
-          setbtc2(res.data.rate[0].btc2);
-          setltc2(res.data.rate[0].ltc2);
-          setbnb2(res.data.rate[0].bnb2);
-          seteth2(res.data.rate[0].eth2);
+      //     setbtc2(res.data.rate[0].btc2);
+      //     setltc2(res.data.rate[0].ltc2);
+      //     setbnb2(res.data.rate[0].bnb2);
+      //     seteth2(res.data.rate[0].eth2);
 
-          setbtc3(res.data.rate[0].btc3);
-          setltc3(res.data.rate[0].ltc3);
-          setbnb3(res.data.rate[0].bnb3);
-          seteth3(res.data.rate[0].eth3);
-          console.log(rate);
-        } else {
-          toast.error(res.data.message);
-        }
-      });
+      //     setbtc3(res.data.rate[0].btc3);
+      //     setltc3(res.data.rate[0].ltc3);
+      //     setbnb3(res.data.rate[0].bnb3);
+      //     seteth3(res.data.rate[0].eth3);
+      //     console.log(rate);
+      //   } else {
+      //     toast.error(res.data.message);
+      //   }
+      // });
     } catch (error) {
       toast.error("Error loading data");
     }
-  }, [data, rate, withdraw]);
+  }, [data, withdraw]);
 
   useEffect(() => {
     let isMounted = true;
@@ -151,15 +153,17 @@ const NewUser = () => {
       bnb3,
     };
     console.log(data);
-    axios.post("http://localhost:5000/users/updateRate", data).then((res) => {
-      setLoading(false);
-      console.log(res);
-      if (res.data.hasError === false) {
-        toast.success("Rate created successfully");
-      } else {
-        toast.error(res.data.message);
-      }
-    });
+    axios
+      .post("https://calm-beyond-85832.herokuapp.com/users/updateRate", data)
+      .then((res) => {
+        setLoading(false);
+        console.log(res);
+        if (res.data.hasError === false) {
+          toast.success("Rate created successfully");
+        } else {
+          toast.error(res.data.message);
+        }
+      });
   };
 
   return (
@@ -181,13 +185,13 @@ const NewUser = () => {
             View Withdrawals
           </Button>
 
-          <Button
+          {/* <Button
             style={{ margin: "30px", display: "flex", alignSelf: "center" }}
             variant="outlined"
             onClick={() => setMode("rate")}
           >
             Update Rate
-          </Button>
+          </Button> */}
         </div>
         <div
           style={{
@@ -311,7 +315,7 @@ const NewUser = () => {
           </div>
         )}
 
-        {mode === "rate" && (
+        {/* {mode === "rate" && (
           <div style={{ width: "100%", margin: "auto", paddingTop: "30px" }}>
             {!loading ? (
               <div style={{ width: "70%", margin: "auto", paddingTop: "30px" }}>
@@ -618,7 +622,7 @@ const NewUser = () => {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </Card>
     </SideBar>
   );

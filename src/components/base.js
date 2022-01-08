@@ -9,13 +9,14 @@ import Navigator from "./sideNav";
 import Header from "./header";
 import Content from "./content";
 import { PinDropSharp } from "@material-ui/icons";
+import { red } from "@mui/material/colors";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://mineware.ltd" target="_blank">
+        Utilminer Inc
       </Link>{" "}
       {new Date().getFullYear()}.
     </Typography>

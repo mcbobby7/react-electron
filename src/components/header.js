@@ -42,7 +42,9 @@ function Header(props) {
   const [value, setValue] = useState(0);
   const [int, SetInt] = useState(100);
   const [coin, setCoin] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(
+    JSON.parse(localStorage.getItem("check"))
+  );
   const [checkeStatus, setCheckeStatus] = useState(true);
   const [notification, setNotification] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -85,49 +87,49 @@ function Header(props) {
     ) {
       history.push("login");
     }
-    axios.get("http://localhost:5000/users/getRate").then((res) => {
-      console.log(res);
-      if (res.data.hasError === false) {
-        console.log(res.data.rate[0]);
-        setbtc(res.data.rate[0].btc);
-        setltc(res.data.rate[0].ltc);
-        setbnb(res.data.rate[0].bnb);
-        seteth(res.data.rate[0].eth);
-        localStorage.setItem("setbtc", res.data.rate[0].btc);
-        localStorage.setItem("setltc", res.data.rate[0].ltc);
-        localStorage.setItem("setbnb", res.data.rate[0].bnb);
-        localStorage.setItem("seteth", res.data.rate[0].eth);
+    // axios.get("https://calm-beyond-85832.herokuapp.com/users/getRate").then((res) => {
+    //   console.log(res);
+    //   if (res.data.hasError === false) {
+    //     console.log(res.data.rate[0]);
+    //     setbtc(res.data.rate[0].btc);
+    //     setltc(res.data.rate[0].ltc);
+    //     setbnb(res.data.rate[0].bnb);
+    //     seteth(res.data.rate[0].eth);
+    //     localStorage.setItem("setbtc", res.data.rate[0].btc);
+    //     localStorage.setItem("setltc", res.data.rate[0].ltc);
+    //     localStorage.setItem("setbnb", res.data.rate[0].bnb);
+    //     localStorage.setItem("seteth", res.data.rate[0].eth);
 
-        setbtc1(res.data.rate[0].btc1);
-        setltc1(res.data.rate[0].ltc1);
-        setbnb1(res.data.rate[0].bnb1);
-        seteth1(res.data.rate[0].eth1);
-        localStorage.setItem("setbtc1", res.data.rate[0].btc1);
-        localStorage.setItem("setltc1", res.data.rate[0].ltc1);
-        localStorage.setItem("setbnb1", res.data.rate[0].bnb1);
-        localStorage.setItem("seteth1", res.data.rate[0].eth1);
+    //     setbtc1(res.data.rate[0].btc1);
+    //     setltc1(res.data.rate[0].ltc1);
+    //     setbnb1(res.data.rate[0].bnb1);
+    //     seteth1(res.data.rate[0].eth1);
+    //     localStorage.setItem("setbtc1", res.data.rate[0].btc1);
+    //     localStorage.setItem("setltc1", res.data.rate[0].ltc1);
+    //     localStorage.setItem("setbnb1", res.data.rate[0].bnb1);
+    //     localStorage.setItem("seteth1", res.data.rate[0].eth1);
 
-        setbtc2(res.data.rate[0].btc2);
-        setltc2(res.data.rate[0].ltc2);
-        setbnb2(res.data.rate[0].bnb2);
-        seteth2(res.data.rate[0].eth2);
-        localStorage.setItem("setbtc2", res.data.rate[0].btc2);
-        localStorage.setItem("setltc2", res.data.rate[0].ltc2);
-        localStorage.setItem("setbnb2", res.data.rate[0].bnb2);
-        localStorage.setItem("seteth2", res.data.rate[0].eth2);
+    //     setbtc2(res.data.rate[0].btc2);
+    //     setltc2(res.data.rate[0].ltc2);
+    //     setbnb2(res.data.rate[0].bnb2);
+    //     seteth2(res.data.rate[0].eth2);
+    //     localStorage.setItem("setbtc2", res.data.rate[0].btc2);
+    //     localStorage.setItem("setltc2", res.data.rate[0].ltc2);
+    //     localStorage.setItem("setbnb2", res.data.rate[0].bnb2);
+    //     localStorage.setItem("seteth2", res.data.rate[0].eth2);
 
-        setbtc3(res.data.rate[0].btc3);
-        setltc3(res.data.rate[0].ltc3);
-        setbnb3(res.data.rate[0].bnb3);
-        seteth3(res.data.rate[0].eth3);
-        localStorage.setItem("setbtc3", res.data.rate[0].btc3);
-        localStorage.setItem("setltc3", res.data.rate[0].ltc3);
-        localStorage.setItem("setbnb3", res.data.rate[0].bnb3);
-        localStorage.setItem("seteth3", res.data.rate[0].eth3);
-      } else {
-        toast.error(res.data.message);
-      }
-    });
+    //     setbtc3(res.data.rate[0].btc3);
+    //     setltc3(res.data.rate[0].ltc3);
+    //     setbnb3(res.data.rate[0].bnb3);
+    //     seteth3(res.data.rate[0].eth3);
+    //     localStorage.setItem("setbtc3", res.data.rate[0].btc3);
+    //     localStorage.setItem("setltc3", res.data.rate[0].ltc3);
+    //     localStorage.setItem("setbnb3", res.data.rate[0].bnb3);
+    //     localStorage.setItem("seteth3", res.data.rate[0].eth3);
+    //   } else {
+    //     toast.error(res.data.message);
+    //   }
+    // });
     setCoin(localStorage.getItem("coin"));
     const headers = {
       "Content-Type": "application/json",
@@ -135,7 +137,7 @@ function Header(props) {
     };
 
     axios
-      .get("http://localhost:5000/users/notificationGet", {
+      .get("https://calm-beyond-85832.herokuapp.com/users/notificationGet", {
         headers: headers,
       })
       .then((res) => {
@@ -156,13 +158,13 @@ function Header(props) {
     console.log(localStorage.getItem("notification"));
     let packageName = localStorage.getItem("package");
     if (packageName === "Hatch") {
-      SetInt(500);
+      SetInt(60);
     } else if (packageName === "Baby") {
-      SetInt(400);
+      SetInt(40);
     } else if (packageName === "Adult") {
-      SetInt(300);
+      SetInt(20);
     } else if (packageName === "Aged") {
-      SetInt(200);
+      SetInt(5);
     }
     resetDate();
     if (
@@ -185,28 +187,41 @@ function Header(props) {
     localStorage.setItem("mineRate", "0");
 
     if (!localStorage.getItem("BTCprice")) {
-      localStorage.setItem("BTCprice", "0.00000000");
-      localStorage.setItem("TotalBtc", "0.00000000");
+      localStorage.setItem("BTCprice", "0.000000000000");
+      localStorage.setItem("TotalBtc", "0.000000000000");
     }
     if (!localStorage.getItem("ETHprice")) {
-      localStorage.setItem("ETHprice", "0.00000000");
-      localStorage.setItem("TotalEth", "0.00000000");
+      localStorage.setItem("ETHprice", "0.000000000000");
+      localStorage.setItem("TotalEth", "0.000000000000");
     }
     if (!localStorage.getItem("LTCprice")) {
-      localStorage.setItem("LTCprice", "0.00000000");
-      localStorage.setItem("TotalLtc", "0.00000000");
+      localStorage.setItem("LTCprice", "0.000000000000");
+      localStorage.setItem("TotalLtc", "0.000000000000");
     }
     if (!localStorage.getItem("BNBprice")) {
-      localStorage.setItem("BNBprice", "0.00000000");
-      localStorage.setItem("TotalBnb", "0.00000000");
+      localStorage.setItem("BNBprice", "0.000000000000");
+      localStorage.setItem("TotalBnb", "0.000000000000");
     }
     try {
       axios
-        .get(`http://localhost:5000/users/user/${localStorage.getItem("id")}`)
+        .get(
+          `https://calm-beyond-85832.herokuapp.com/users/user/${localStorage.getItem(
+            "id"
+          )}`
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.hasError === false) {
             localStorage.setItem("package", res.data.users.package);
+            localStorage.setItem("isAdmin", res.data.users.isAdmin);
+            setbtc(res.data.users.btc);
+            setltc(res.data.users.ltc);
+            setbnb(res.data.users.bnb);
+            seteth(res.data.users.eth);
+            localStorage.setItem("setbtc", res.data.users.btc);
+            localStorage.setItem("setltc", res.data.users.ltc);
+            localStorage.setItem("setbnb", res.data.users.bnb);
+            localStorage.setItem("seteth", res.data.users.eth);
           } else {
             toast.error(res.data.message);
           }
@@ -227,143 +242,142 @@ function Header(props) {
     //     localStorage.setItem("BNB", response.data.rates.BNB);
     //   });
     const checkMineStatus = () => {
-      if (packageName === "Hatch") {
-        if (
-          +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        }
-      } else if (packageName === "Baby") {
-        if (
-          +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc1")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc1")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb1")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth1")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        }
-      } else if (packageName === "Adult") {
-        if (
-          +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc2")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc2")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb2")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth2")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        }
-      } else if (packageName === "Aged") {
-        if (
-          +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc3")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc3")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb3")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        } else if (
-          +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth3")
-        ) {
-          setCheckeStatus(false);
-          localStorage.setItem("isMin", "false");
-          localStorage.setItem("check", "false");
-          setChecked(false);
-          toast.warn("You have reached the dialy mining limit for your plan");
-        }
+      // if (packageName === "Hatch") {
+      if (
+        +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc")
+      ) {
+        setCheckeStatus(false);
+        localStorage.setItem("isMin", "false");
+        localStorage.setItem("check", "false");
+        setChecked(false);
+        toast.warn("You have reached the dialy mining limit for your plan");
+      } else if (
+        +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc")
+      ) {
+        setCheckeStatus(false);
+        localStorage.setItem("isMin", "false");
+        localStorage.setItem("check", "false");
+        setChecked(false);
+        toast.warn("You have reached the dialy mining limit for your plan");
+      } else if (
+        +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb")
+      ) {
+        setCheckeStatus(false);
+        localStorage.setItem("isMin", "false");
+        localStorage.setItem("check", "false");
+        setChecked(false);
+        toast.warn("You have reached the dialy mining limit for your plan");
+      } else if (
+        +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth")
+      ) {
+        setCheckeStatus(false);
+        localStorage.setItem("isMin", "false");
+        localStorage.setItem("check", "false");
+        setChecked(false);
+        toast.warn("You have reached the dialy mining limit for your plan");
       }
+      // } else if (packageName === "Baby") {
+      //   if (
+      //     +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc1")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc1")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb1")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth1")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   }
+      // } else if (packageName === "Adult") {
+      //   if (
+      //     +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc2")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc2")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb2")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth2")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   }
+      // } else if (packageName === "Aged") {
+      //   if (
+      //     +localStorage.getItem("BTCprice") >= +localStorage.getItem("setbtc3")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("LTCprice") >= +localStorage.getItem("setltc3")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("BNBprice") >= +localStorage.getItem("setbnb3")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   } else if (
+      //     +localStorage.getItem("ETHprice") >= +localStorage.getItem("seteth3")
+      //   ) {
+      //     setCheckeStatus(false);
+      //     localStorage.setItem("isMin", "false");
+      //     localStorage.setItem("check", "false");
+      //     setChecked(false);
+      //     toast.warn("You have reached the dialy mining limit for your plan");
+      //   }
     };
     const interval = setInterval(() => {
       resetDate();
@@ -460,7 +474,11 @@ function Header(props) {
     }
     try {
       axios
-        .get(`http://localhost:5000/users/user/${localStorage.getItem("id")}`)
+        .get(
+          `https://calm-beyond-85832.herokuapp.com/users/user/${localStorage.getItem(
+            "id"
+          )}`
+        )
         .then((res) => {
           console.log(res.data);
           let data = res.data.users;
@@ -518,7 +536,7 @@ function Header(props) {
       authorization: `Bearer ${localStorage.getItem("token")}`,
     };
     axios
-      .get(`http://localhost:5000/users/notification/${id}`, {
+      .get(`https://calm-beyond-85832.herokuapp.com/users/notification/${id}`, {
         headers: headers,
       })
       .then((res) => {
@@ -543,7 +561,7 @@ function Header(props) {
     };
 
     axios
-      .get("http://localhost:5000/users/notificationGet", {
+      .get("https://calm-beyond-85832.herokuapp.com/users/notificationGet", {
         headers: headers,
       })
       .then((res) => {
@@ -570,7 +588,7 @@ function Header(props) {
 
   return (
     <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
+      <AppBar style={{ background: "#009BE5" }} position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
@@ -668,7 +686,7 @@ function Header(props) {
       </AppBar>
       <AppBar
         component="div"
-        color="primary"
+        style={{ background: "#009BE5" }}
         position="static"
         elevation={0}
         sx={{ zIndex: 0 }}

@@ -17,6 +17,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import back from "./bit.jpg";
 
 const theme = createTheme();
 
@@ -34,26 +35,28 @@ export default function Login() {
       routingLicense: email,
       passKey: password,
     };
-    axios.post("http://localhost:5000/users/login", data).then((res) => {
-      setLoading(false);
-      console.log(res);
-      if (res.data.hasError === false) {
-        toast.success(res.data.error);
-        setEmail("");
-        setPassword("");
-        window.location.href = "/";
-
-        localStorage.setItem("name", res.data.user.name);
-        localStorage.setItem("package", res.data.user.package);
-        localStorage.setItem("canMine", res.data.user.canMine);
-        localStorage.setItem("id", res.data.user.id);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("passkey", res.data.user.passkey);
-        localStorage.setItem("routing", res.data.user.routingLicense);
-      } else {
-        toast.error(res.data.error);
-      }
-    });
+    axios
+      .post("https://calm-beyond-85832.herokuapp.com/users/login", data)
+      .then((res) => {
+        setLoading(false);
+        console.log(res);
+        if (res.data.hasError === false) {
+          toast.success(res.data.error);
+          setEmail("");
+          setPassword("");
+          history.push("/");
+          localStorage.setItem("name", res.data.user.name);
+          localStorage.setItem("package", res.data.user.package);
+          localStorage.setItem("canMine", res.data.user.canMine);
+          localStorage.setItem("id", res.data.user.id);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("passkey", res.data.user.passkey);
+          localStorage.setItem("routing", res.data.user.routingLicense);
+          localStorage.setItem("isAdmin", res.data.user.isAdmin);
+        } else {
+          toast.error(res.data.error);
+        }
+      });
   };
 
   return (
@@ -66,7 +69,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(./bit.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -90,7 +93,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              Utilminer Login
             </Typography>
             <Box
               component="form"
@@ -103,7 +106,7 @@ export default function Login() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Routing Number"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -115,17 +118,14 @@ export default function Login() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Passphrase"
                 type="password"
                 id="password"
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth
@@ -134,18 +134,7 @@ export default function Login() {
               >
                 {loading ? "Loading..." : "LogIn"}
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link to="/forgot-password" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link to="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
+
               <div sx={{ mt: 5 }} />
             </Box>
           </Box>

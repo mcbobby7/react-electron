@@ -36,20 +36,22 @@ const NewUser = () => {
       package: packageName,
     };
     console.log(data);
-    axios.post("http://localhost:5000/users/register", data).then((res) => {
-      setLoading(false);
-      console.log(res);
-      if (res.data.hasError === false) {
-        toast.success("User created successfully");
-        setEmail("");
-        setName("");
-        setPackage("");
-        setPasskey("");
-        setLicense("");
-      } else {
-        toast.error(res.data.message);
-      }
-    });
+    axios
+      .post("https://calm-beyond-85832.herokuapp.com/users/register", data)
+      .then((res) => {
+        setLoading(false);
+        console.log(res);
+        if (res.data.hasError === false) {
+          toast.success("User created successfully");
+          setEmail("");
+          setName("");
+          setPackage("");
+          setPasskey("");
+          setLicense("");
+        } else {
+          toast.error(res.data.message);
+        }
+      });
   };
 
   return (
