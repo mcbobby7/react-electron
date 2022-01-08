@@ -212,6 +212,8 @@ function Header(props) {
         .then((res) => {
           console.log(res.data);
           if (res.data.hasError === false) {
+            if (res.data.message === "No user found") {
+            }
             localStorage.setItem("package", res.data.users.package);
             localStorage.setItem("isAdmin", res.data.users.isAdmin);
             setbtc(res.data.users.btc);
@@ -389,26 +391,117 @@ function Header(props) {
       if (localStorage.getItem("isMin") === "true") {
         localStorage.setItem("minDate", JSON.stringify(new Date()));
         if (localStorage.getItem("coin") === "BTC") {
-          let price = +localStorage.getItem("BTCprice") + 0.00000001;
-          let Totalprice = +localStorage.getItem("TotalBtc") + 0.00000001;
-          localStorage.setItem("BTCprice", price);
-          localStorage.setItem("TotalBtc", Totalprice);
-          console.log("mining BTC");
+          let packageName = localStorage.getItem("package");
+          if (packageName === "Hatch") {
+            SetInt(90);
+            let price = +localStorage.getItem("BTCprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
+            localStorage.setItem("BTCprice", price);
+            localStorage.setItem("TotalBtc", Totalprice);
+            console.log("mining BTC");
+          } else if (packageName === "Baby") {
+            SetInt(40);
+            let price = +localStorage.getItem("BTCprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
+            localStorage.setItem("BTCprice", price);
+            localStorage.setItem("TotalBtc", Totalprice);
+            console.log("mining BTC");
+          } else if (packageName === "Adult") {
+            SetInt(20);
+            let price = +localStorage.getItem("BTCprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
+            localStorage.setItem("BTCprice", price);
+            localStorage.setItem("TotalBtc", Totalprice);
+            console.log("mining BTC");
+          } else if (packageName === "Aged") {
+            SetInt(1);
+            let price = +localStorage.getItem("BTCprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
+            localStorage.setItem("BTCprice", price);
+            localStorage.setItem("TotalBtc", Totalprice);
+            console.log("mining BTC");
+          }
         } else if (localStorage.getItem("coin") === "LTC") {
-          let price = +localStorage.getItem("LTCprice") + 0.00000001;
-          let Totalprice = +localStorage.getItem("TotalLtc") + 0.00000001;
-          localStorage.setItem("LTCprice", price);
-          localStorage.setItem("TotalLtc", Totalprice);
+          let packageName = localStorage.getItem("package");
+          if (packageName === "Hatch") {
+            SetInt(60);
+            let price = +localStorage.getItem("LTCprice") + 0.00001;
+            let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
+            localStorage.setItem("LTCprice", price);
+            localStorage.setItem("TotalLtc", Totalprice);
+          } else if (packageName === "Baby") {
+            SetInt(40);
+            let price = +localStorage.getItem("LTCprice") + 0.00001;
+            let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
+            localStorage.setItem("LTCprice", price);
+            localStorage.setItem("TotalLtc", Totalprice);
+          } else if (packageName === "Adult") {
+            SetInt(20);
+            let price = +localStorage.getItem("LTCprice") + 0.00001;
+            let Totalprice = +localStorage.getItem("TotalLtc") + 0.00001;
+            localStorage.setItem("LTCprice", price);
+            localStorage.setItem("TotalLtc", Totalprice);
+          } else if (packageName === "Aged") {
+            SetInt(0);
+            let price = +localStorage.getItem("LTCprice") + 0.000001;
+            let Totalprice = +localStorage.getItem("TotalLtc") + 0.000001;
+            localStorage.setItem("LTCprice", price);
+            localStorage.setItem("TotalLtc", Totalprice);
+          }
         } else if (localStorage.getItem("coin") === "BNB") {
-          let price = +localStorage.getItem("BNBprice") + 0.00000001;
-          let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
-          localStorage.setItem("BNBprice", price);
-          localStorage.setItem("TotalBnb", Totalprice);
+          let packageName = localStorage.getItem("package");
+          if (packageName === "Hatch") {
+            SetInt(60);
+            let price = +localStorage.getItem("BNBprice") + 0.00000001;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            localStorage.setItem("BNBprice", price);
+            localStorage.setItem("TotalBnb", Totalprice);
+          } else if (packageName === "Baby") {
+            SetInt(40);
+            let price = +localStorage.getItem("BNBprice") + 0.00000001;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            localStorage.setItem("BNBprice", price);
+            localStorage.setItem("TotalBnb", Totalprice);
+          } else if (packageName === "Adult") {
+            SetInt(20);
+            let price = +localStorage.getItem("BNBprice") + 0.00000001;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            localStorage.setItem("BNBprice", price);
+            localStorage.setItem("TotalBnb", Totalprice);
+          } else if (packageName === "Aged") {
+            SetInt(5);
+            let price = +localStorage.getItem("BNBprice") + 0.00000001;
+            let Totalprice = +localStorage.getItem("TotalBnb") + 0.00000001;
+            localStorage.setItem("BNBprice", price);
+            localStorage.setItem("TotalBnb", Totalprice);
+          }
         } else if (localStorage.getItem("coin") === "ETH") {
-          let price = +localStorage.getItem("ETHprice") + 0.00000001;
-          let Totalprice = +localStorage.getItem("TotalEth") + 0.00000001;
-          localStorage.setItem("ETHprice", price);
-          localStorage.setItem("TotalEth", Totalprice);
+          let packageName = localStorage.getItem("package");
+          if (packageName === "Hatch") {
+            SetInt(60);
+            let price = +localStorage.getItem("ETHprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            localStorage.setItem("ETHprice", price);
+            localStorage.setItem("TotalEth", Totalprice);
+          } else if (packageName === "Baby") {
+            SetInt(40);
+            let price = +localStorage.getItem("ETHprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            localStorage.setItem("ETHprice", price);
+            localStorage.setItem("TotalEth", Totalprice);
+          } else if (packageName === "Adult") {
+            SetInt(20);
+            let price = +localStorage.getItem("ETHprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            localStorage.setItem("ETHprice", price);
+            localStorage.setItem("TotalEth", Totalprice);
+          } else if (packageName === "Aged") {
+            SetInt(5);
+            let price = +localStorage.getItem("ETHprice") + 0.0000001;
+            let Totalprice = +localStorage.getItem("TotalEth") + 0.0000001;
+            localStorage.setItem("ETHprice", price);
+            localStorage.setItem("TotalEth", Totalprice);
+          }
         }
       }
     }, int);
