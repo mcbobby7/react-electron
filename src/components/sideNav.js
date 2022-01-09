@@ -50,6 +50,17 @@ const itemCategory = {
 export default function Navigator(props) {
   const history = useHistory();
   const location = useLocation();
+  const logout = () => {
+    history.push("/login");
+    localStorage.setItem("name", "");
+    localStorage.setItem("package", "");
+    localStorage.setItem("canMine", "");
+    localStorage.setItem("id", "");
+    localStorage.setItem("token", "");
+    localStorage.setItem("passkey", "");
+    localStorage.setItem("routing", "");
+    localStorage.setItem("isAdmin", "");
+  };
   const categories = [
     {
       id: "Dashboard",
@@ -195,7 +206,7 @@ export default function Navigator(props) {
           <ListItem
             sx={{ py: 2, px: 3 }}
             style={{ cursor: "pointer" }}
-            onClick={() => history.push("/login")}
+            onClick={() => logout()}
           >
             <ListItemIcon style={{ color: "rgba(255, 255, 255, 0.7)" }}>
               <LogoutIcon />

@@ -80,13 +80,17 @@ function Header(props) {
   // };
 
   useEffect(() => {
-    if (
-      !localStorage.getItem("id") ||
-      localStorage.getItem("id") === null ||
-      localStorage.getItem("id") === undefined
-    ) {
-      history.push("login");
+    if (localStorage.getItem("login") === "false") {
+      if (
+        !localStorage.getItem("id") ||
+        localStorage.getItem("id") === null ||
+        localStorage.getItem("id") === undefined
+      ) {
+        history.push("login");
+      }
     }
+
+    localStorage.setItem("login", "false");
     // axios.get("https://calm-beyond-85832.herokuapp.com/users/getRate").then((res) => {
     //   console.log(res);
     //   if (res.data.hasError === false) {
@@ -135,27 +139,30 @@ function Header(props) {
       "Content-Type": "application/json",
       authorization: `Bearer ${localStorage.getItem("token")}`,
     };
-
-    axios
-      .get("https://calm-beyond-85832.herokuapp.com/users/notificationGet", {
-        headers: headers,
-      })
-      .then((res) => {
-        setNotification(res.data.notif.reverse());
-        for (let i = 0; i < notification.length; i++) {
-          if (notification[i].isSeen === false) {
-            setRead(true);
+    if (
+      !localStorage.getItem("id") ||
+      localStorage.getItem("id") !== null ||
+      localStorage.getItem("id") !== undefined ||
+      localStorage.getItem("id") !== ""
+    ) {
+      axios
+        .get("https://calm-beyond-85832.herokuapp.com/users/notificationGet", {
+          headers: headers,
+        })
+        .then((res) => {
+          setNotification(res.data.notif.reverse());
+          for (let i = 0; i < notification.length; i++) {
+            if (notification[i].isSeen === false) {
+              setRead(true);
+            }
           }
-        }
-        console.log(notification);
-      })
-      .catch((err) => {
-        toast.error("cannot load notifications");
-      });
+        })
+        .catch((err) => {
+          toast.error("cannot load notifications");
+        });
+    }
 
     localStorage.setItem("notification", parseInt(notification.length));
-    console.log(notification.length);
-    console.log(localStorage.getItem("notification"));
     let packageName = localStorage.getItem("package");
     if (packageName === "Hatch") {
       SetInt(60);
@@ -210,7 +217,6 @@ function Header(props) {
           )}`
         )
         .then((res) => {
-          console.log(res.data);
           if (res.data.hasError === false) {
             if (res.data.message === "No user found") {
             }
@@ -398,28 +404,24 @@ function Header(props) {
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
-            console.log("mining BTC");
           } else if (packageName === "Baby") {
             SetInt(40);
             let price = +localStorage.getItem("BTCprice") + 0.0000001;
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
-            console.log("mining BTC baby");
           } else if (packageName === "Adult") {
             SetInt(26);
             let price = +localStorage.getItem("BTCprice") + 0.0000001;
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000001;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
-            console.log("mining BTC adult");
           } else if (packageName === "Aged") {
             SetInt(0);
             let price = +localStorage.getItem("BTCprice") + 0.0000005;
             let Totalprice = +localStorage.getItem("TotalBtc") + 0.0000005;
             localStorage.setItem("BTCprice", price);
             localStorage.setItem("TotalBtc", Totalprice);
-            console.log("mining BTC");
           }
         } else if (localStorage.getItem("coin") === "LTC") {
           let packageName = localStorage.getItem("package");
@@ -528,7 +530,6 @@ function Header(props) {
 
     const newdate = year + "/" + month + "/" + day;
     if (localStorage.getItem("date") !== newdate) {
-      console.log("nooo");
       const dailyTransaction = {
         date: localStorage.getItem("date"),
         ETH: localStorage.getItem("ETHprice"),
@@ -573,7 +574,6 @@ function Header(props) {
           )}`
         )
         .then((res) => {
-          console.log(res.data);
           let data = res.data.users;
           if (res.data.hasError === false) {
             localStorage.setItem("package", res.data.users.package);
@@ -606,10 +606,6 @@ function Header(props) {
     let coinRate = localStorage.getItem(coin);
     let mineRate = +rate / coinRate;
     let mineSec = mineRate / 14000;
-    console.log("coinRate", coinRate);
-    console.log("Rate", rate);
-    console.log("minRate", mineRate.toFixed(8));
-    console.log("minSec", mineSec);
     localStorage.setItem("mineRate", mineRate.toFixed(8));
     localStorage.setItem("mineSec", mineSec);
   };
@@ -619,7 +615,6 @@ function Header(props) {
     localStorage.setItem("isMin", "false");
     localStorage.setItem("check", "false");
     setChecked(event.target.checked);
-    console.log(event);
   };
   const label = { inputProps: { "aria-label": "Start Mining" } };
 
@@ -638,7 +633,6 @@ function Header(props) {
             notification[i].isSeen = true;
           }
         }
-        console.log(notification);
         toast.success("Notification has been marked as read");
       })
       .catch((err) => {
@@ -670,8 +664,6 @@ function Header(props) {
       });
 
     localStorage.setItem("notification", parseInt(notification.length));
-    console.log(notification.length);
-    console.log(localStorage.getItem("notification"));
   };
 
   let not = localStorage.getItem("notification");
@@ -681,7 +673,7 @@ function Header(props) {
 
   return (
     <React.Fragment>
-      <AppBar style={{ background: "#009BE5" }} position="sticky" elevation={0}>
+      <AppBar className="appbar" position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
@@ -765,11 +757,16 @@ function Header(props) {
                     </MenuItem>
                   );
                 })}
+                {notification.length === 0 && (
+                  <div style={{ padding: "10px 40px", width: "200px" }}>
+                    No Notification yet
+                  </div>
+                )}
               </Menu>
             </Grid>
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }}>
-                {localStorage.getItem("name")}
+                <span className="text">{localStorage.getItem("name")}</span>
                 <span style={{ width: "10px" }}></span>
                 <Avatar alt="My Avatar" />
               </IconButton>
@@ -783,11 +780,12 @@ function Header(props) {
         position="static"
         elevation={0}
         sx={{ zIndex: 0 }}
+        className="appbar"
       >
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
+              <Typography className="text" variant="h5" component="h1">
                 {location.pathname === "/"
                   ? "Home"
                   : location.pathname.substring(1).charAt(0).toUpperCase() +
@@ -845,26 +843,39 @@ function Header(props) {
         position="static"
         elevation={0}
         sx={{ zIndex: 0 }}
+        className="appbar"
       >
         {location.pathname === "/" && (
-          <Tabs value={location.pathname === "/" ? 0 : 1} textColor="inherit">
+          <Tabs
+            className="text"
+            value={location.pathname === "/" ? 0 : 1}
+            textColor="inherit"
+          >
             <Tab
+              className="text"
               label="OVERVIEW"
               onClick={() => [setValue(0), history.push("/")]}
             />
             <Tab
+              className="text"
               label="TRANSACTION HISTORY"
               onClick={() => [setValue(1), history.push("history")]}
             />
           </Tabs>
         )}
         {location.pathname === "/history" && (
-          <Tabs value={location.pathname === "/" ? 0 : 1} textColor="inherit">
+          <Tabs
+            className="text"
+            value={location.pathname === "/" ? 0 : 1}
+            textColor="white"
+          >
             <Tab
+              className="text"
               label="OVERVIEW"
               onClick={() => [setValue(0), history.push("/")]}
             />
             <Tab
+              className="text"
               label="TRANSACTION HISTORY"
               onClick={() => [setValue(1), history.push("history")]}
             />

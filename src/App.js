@@ -45,8 +45,23 @@ function App() {
     }, 3000);
     return () => clearInterval(interval);
   };
+
+  const handleWindowClose = () => {
+    window.addEventListener("beforeunload", (ev) => {
+      ev.preventDefault();
+      localStorage.setItem("name", "");
+      localStorage.setItem("package", "");
+      localStorage.setItem("canMine", "");
+      localStorage.setItem("id", "");
+      localStorage.setItem("token", "");
+      localStorage.setItem("passkey", "");
+      localStorage.setItem("routing", "");
+      localStorage.setItem("isAdmin", "");
+      return;
+    });
+  };
   useEffect(() => {
-    console.log(JSON.parse(user));
+    handleWindowClose();
     // var opsys = process;
     // console.log(opsys);
     run();
