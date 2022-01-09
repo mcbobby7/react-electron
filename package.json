@@ -7,7 +7,7 @@
     "appId": "utilminer.electronapp",
     "productName": "Utilminer",
     "mac": {
-      "icon": "build/icon.png",
+      "icon": "build/iconMac.png",
       "target": "tar.gz"
     },
     "linux": {
