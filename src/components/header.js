@@ -674,6 +674,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <AppBar className="appbar" position="sticky" elevation={0}>
+        <div style={{ height: "50px" }}></div>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: "none", xs: "block" } }} item>

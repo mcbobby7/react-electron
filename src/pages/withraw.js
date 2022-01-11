@@ -310,7 +310,7 @@ const Configuration = () => {
               </div>
 
               <Box
-                style={{ width: "400px", margin: "auto", marginTop: "30px" }}
+                style={{ width: "200px", margin: "auto", marginTop: "30px" }}
               >
                 <FormControl variant="standard">
                   <InputLabel htmlFor="input-with-icon-adornment">
@@ -318,7 +318,7 @@ const Configuration = () => {
                   </InputLabel>
                   <Input
                     id="input-with-icon-adornment"
-                    style={{ width: "400px" }}
+                    style={{ width: "200px" }}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                   />

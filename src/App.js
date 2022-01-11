@@ -13,6 +13,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import "./App.css";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -100,6 +101,10 @@ function App() {
             }}
           >
             <div className="status">
+              <div className="stat">BTC</div>
+              <div className="name">{+BTCvalue}</div>
+            </div>
+            <div className="status">
               <div className="stat">ETH</div>
               <div className="name">{+ETHvalue}</div>
             </div>
@@ -110,10 +115,6 @@ function App() {
             <div className="status">
               <div className="stat">LTC</div>
               <div className="name">{+LTCvalue}</div>
-            </div>
-            <div className="status">
-              <div className="stat">BTC</div>
-              <div className="name">{+BTCvalue}</div>
             </div>
           </div>
           {}
@@ -167,12 +168,7 @@ function App() {
                 </Card>
               </span>
             </div>
-            <div
-              style={{
-                width: "68%",
-                height: "100%",
-              }}
-            >
+            <div className="tables">
               <div style={{ height: "20px" }}></div>
               {/* <table>
                   <thead>

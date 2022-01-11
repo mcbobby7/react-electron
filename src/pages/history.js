@@ -106,7 +106,7 @@ const NewUser = () => {
         >
           Transaction History
         </div>
-        <div style={{ width: "100%", margin: "auto", paddingTop: "30px" }}>
+        <div className="tables1">
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>

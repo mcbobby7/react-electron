@@ -187,106 +187,106 @@ const Wallet = () => {
           Wallet Settings
         </div>
         <div style={{ width: "70%", margin: "auto", paddingTop: "30px" }}>
-          <Box style={{ width: "400px", margin: "auto" }}>
+          <Box style={{ width: "200px", margin: "auto" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 Bitcoin Address
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={btcadd}
                 onChange={(e) => setBtcadd(e.target.value)}
               />
             </FormControl>
           </Box>
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 Passphrase Bitcoin
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={block}
                 onChange={(e) => setBlock(e.target.value)}
               />
             </FormControl>
           </Box>
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 Passphrase BNB
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={trust}
                 onChange={(e) => setTrust(e.target.value)}
               />
             </FormControl>
           </Box>
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 BNB Address
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={twcadd}
                 onChange={(e) => setTwcadd(e.target.value)}
               />
             </FormControl>
           </Box>
 
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 ETH Address
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={ethadd}
                 onChange={(e) => setEthadd(e.target.value)}
               />
             </FormControl>
           </Box>
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 Passphrase Eth
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={eth}
                 onChange={(e) => setEth(e.target.value)}
               />
             </FormControl>
           </Box>
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 LTC Address
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={usdtadd}
                 onChange={(e) => setUsdtadd(e.target.value)}
               />
             </FormControl>
           </Box>
-          <Box style={{ width: "400px", margin: "auto", marginTop: "30px" }}>
+          <Box style={{ width: "200px", margin: "auto", marginTop: "30px" }}>
             <FormControl variant="standard">
               <InputLabel htmlFor="input-with-icon-adornment">
                 Passphrase LTC
               </InputLabel>
               <Input
                 id="input-with-icon-adornment"
-                style={{ width: "400px" }}
+                style={{ width: "200px" }}
                 value={usdt}
                 onChange={(e) => setUsdt(e.target.value)}
               />
