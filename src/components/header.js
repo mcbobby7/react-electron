@@ -31,8 +31,32 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import MessageIcon from "@mui/icons-material/Message";
 import Menu from "@mui/material/Menu";
+import Backdrop from "@mui/material/Backdrop";
+
 import "./styles.css";
 const lightColor = "rgba(255, 255, 255, 0.7)";
+
+class Modal extends React.Component {
+  render(props) {
+    return (
+      <>
+        <div class="modal" id="modal">
+          <h2>Notification Panel</h2>
+          <div class="content">{this.props.children}</div>
+          <div class="actions">
+            <button
+              style={{ color: "white", backgroundColor: "#009BE5" }}
+              onClick={this.props.handleclose}
+              class="toggle-button"
+            >
+              close
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
 
 function Header(props) {
   const history = useHistory();
@@ -40,6 +64,7 @@ function Header(props) {
   const { onDrawerToggle } = props;
   const location = useLocation();
   const [value, setValue] = useState(0);
+  const [open1, setOpen1] = useState(false);
   const [int, SetInt] = useState(100);
   const [coin, setCoin] = useState("");
   const [checked, setChecked] = useState(
@@ -48,6 +73,7 @@ function Header(props) {
   const [checkeStatus, setCheckeStatus] = useState(true);
   const [notification, setNotification] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [message, setMessage] = useState("new message");
   const [read, setRead] = useState(false);
   const [btc, setbtc] = React.useState("");
   const [ltc, setltc] = React.useState("");
@@ -673,6 +699,12 @@ function Header(props) {
 
   return (
     <React.Fragment>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: 50 }}
+        open={open1}
+        onClick={() => setOpen1(false)}
+      ></Backdrop>
+      {open1 && <Modal handleclose={() => setOpen1(false)}>{message}</Modal>}
       <AppBar className="appbar" position="sticky" elevation={0}>
         <div style={{ height: "50px" }}></div>
         <Toolbar>
@@ -746,13 +778,28 @@ function Header(props) {
                 {notification.map((item) => {
                   return item.isSeen === false ? (
                     <div className="notify-menu" key={item._id}>
-                      <MenuItem onClick={() => onClick(item._id)}>
+                      <MenuItem
+                        onClick={() => [
+                          onClick(item._id),
+                          setMessage(item.message),
+                          setOpen1(true),
+                          setAnchorEl(false),
+                        ]}
+                      >
                         <MessageIcon className="notify-icon" />
                         <p className="notify-text">{item.message}</p>
                       </MenuItem>
                     </div>
                   ) : (
-                    <MenuItem key={item._id} onClick={() => onClick(item._id)}>
+                    <MenuItem
+                      key={item._id}
+                      onClick={() => [
+                        onClick(item._id),
+                        setMessage(item.message),
+                        setOpen1(true),
+                        setAnchorEl(false),
+                      ]}
+                    >
                       <MessageIcon className="notify-icon" />
                       <p className="notify-text">{item.message}</p>
                     </MenuItem>

@@ -1,6 +1,6 @@
 {
   "name": "utilminer",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "crypto mining app",
   "author": "Utilminer",
   "build": {

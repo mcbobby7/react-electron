@@ -28,6 +28,7 @@ const Block = () => {
   const [ltc, setltc] = React.useState("");
   const [eth, seteth] = React.useState("");
   const [bnb, setbnb] = React.useState("");
+  const [notification, setNotification] = React.useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,6 +45,7 @@ const Block = () => {
         console.log(res);
         if (res.data.hasError === false) {
           toast.success("Notification sent successfully");
+          getNotif();
           setMessage("");
         } else {
           toast.error(res.data.message);
@@ -113,6 +115,7 @@ const Block = () => {
     let isMounted = true;
     if (isMounted) {
       getData();
+      getNotif();
     }
 
     return () => {
@@ -188,6 +191,29 @@ const Block = () => {
         } else {
           toast.error(res.data.message);
         }
+      });
+  };
+
+  const getNotif = () => {
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+
+    axios
+      .get(
+        `https://calm-beyond-85832.herokuapp.com/users/notificationGetSingle/${id}`,
+        {
+          headers: headers,
+        }
+      )
+      .then((res) => {
+        setNotification(res.data.notif.reverse());
+        console.log(res);
+      })
+      .catch((err) => {
+        toast.error("cannot load notifications");
+        console.log(err);
       });
   };
 
@@ -423,6 +449,19 @@ const Block = () => {
             </Button>
           </div>
         </Box>
+        <table style={{ width: "100%" }}>
+          <tbody>
+            <tr>
+              <th>Notifications</th>
+            </tr>
+            {notification.length > 0 &&
+              notification.map((message) => (
+                <tr>
+                  <th>{message.message}</th>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </Card>
     </SideBar>
   );
