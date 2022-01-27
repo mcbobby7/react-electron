@@ -15,9 +15,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://mineware.ltd" target="_blank">
-        Utilminer Inc
-      </Link>{" "}
+      {/* <Link color="inherit" href="#" target="_blank"> */}
+      Utilminer Inc
+      {/* </Link>{" "} */}
       {new Date().getFullYear()}.
     </Typography>
   );
